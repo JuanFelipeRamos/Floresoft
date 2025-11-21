@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'apps.usuarios',
+    'apps.variedadFlor',
 ]
 
 MIDDLEWARE = [

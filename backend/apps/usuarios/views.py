@@ -12,6 +12,7 @@ from rest_framework.views import APIView
 from .models import UsuarioAdministrador
 from .serializers import UsuarioAdminSerializer
 
+# Vista para crear usuarios
 class UsuarioAdminViewSet(CreateAPIView):
     queryset = UsuarioAdministrador.objects.all()
     serializer_class = UsuarioAdminSerializer
