@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'apps.usuarios',
     'apps.variedadFlor',
+    'apps.materiales',
 ]
 
 MIDDLEWARE = [
