@@ -2,6 +2,7 @@
 from rest_framework import serializers
 from .models import Receta, MaterialReceta#, VariedadFlorReceta
 from apps.materiales.models import Material
+from apps.materiales.serializers import MaterialSerializer
 #from apps.variedadFlor.models import VariedadFlor
 
 """
@@ -47,8 +48,17 @@ class MaterialRecetaSerializer(serializers.Serializer):
         return material
 
 
+# serializer para listar los materiales con detalles en la lista de materiales de una receta
+class MaterialRecetaReadSerializer(serializers.ModelSerializer):
+    material = MaterialSerializer(read_only=True)
+    class Meta:
+        model = MaterialReceta
+        fields = ["id", "material", "quantity", "price_total"]
+
+
 class RecetaSerializer(serializers.ModelSerializer):
     detalles_material = MaterialRecetaSerializer(many=True, write_only=True) # lista de los materiales
+    materiales = MaterialRecetaReadSerializer(source="materialreceta_set", many=True, read_only=True)
 
     class Meta:
         model = Receta
