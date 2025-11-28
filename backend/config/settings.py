@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'apps.usuarios',
     'apps.variedadFlor',
     'apps.materiales',
+    'apps.manoDeObra',
+    'apps.recetas',
 ]
 
 MIDDLEWARE = [

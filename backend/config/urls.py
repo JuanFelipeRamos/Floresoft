@@ -9,4 +9,6 @@ urlpatterns = [
     path('api/usuarios/', include('apps.usuarios.urls')),
     path('api/flores/', include('apps.variedadFlor.urls')),
     path('api/materiales/', include('apps.materiales.urls')),
+    path('api/manos_de_obra/', include('apps.manoDeObra.urls')),
+    path('api/recetas/', include('apps.recetas.urls')),
 ]
