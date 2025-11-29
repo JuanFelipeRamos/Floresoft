@@ -7,6 +7,9 @@ class Receta(models.Model):
     materiales = models.ManyToManyField(Material, through="MaterialReceta")
     total_materiales = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank=True)
 
+    variedades = models.ManyToManyField(VariedadFlor, through="VariedadFlorReceta")
+    total_variedades = models.DecimalField(max_digits=11, decimal_places=2, null=True, blank=True)
+
     def __str__(self):
         return f"{self.num_receta} - {self.materiales} - {self.total_materiales}"
 
@@ -21,7 +24,7 @@ class VariedadFlorReceta(models.Model):
     receta = models.ForeignKey(Receta, on_delete=models.CASCADE)
     quantity_stems = models.PositiveIntegerField()
     quantity_bouquets = models.PositiveIntegerField()
-    price_total = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    price_total_tallos = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank=True)
 
 
 # Tabla intermedia receta-materiales
@@ -29,7 +32,7 @@ class MaterialReceta(models.Model):
     material = models.ForeignKey(Material, on_delete=models.CASCADE)
     receta = models.ForeignKey(Receta, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
-    price_total = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
+    price_total = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank=True)
 
     class Meta:
         verbose_name = "Material de la receta"
