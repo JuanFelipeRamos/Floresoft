@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Receta, MaterialReceta
+from .models import Receta
 
 @admin.register(Receta)
 class RecetaAdmin(admin.ModelAdmin):
@@ -8,15 +8,10 @@ class RecetaAdmin(admin.ModelAdmin):
         'get_variedades',
         'total_variedades',
         'get_materiales',
-        'total_materiales'
+        'total_materiales',
+        'get_manos_de_obra',
+        'total_mano_de_obra'
         )
-
-    def get_materiales(self, obj):
-        # Muestra todos los materiales conectados a la receta
-        materiales = obj.materialreceta_set.all()
-        return ", ".join([mr.material.name for mr in materiales])
-
-    get_materiales.short_description = "Materiales"
 
     def get_variedades(self, obj):
         # Muestra todas las variedades conectados a la receta
@@ -25,6 +20,18 @@ class RecetaAdmin(admin.ModelAdmin):
 
     get_variedades.short_description = "Variedades"
 
-@admin.register(MaterialReceta)
-class MaterialRecetaAdmin(admin.ModelAdmin):
-    list_display = ("material", "receta", "quantity")
+
+    def get_materiales(self, obj):
+        # Muestra todos los materiales conectados a la receta
+        materiales = obj.materialreceta_set.all()
+        return ", ".join([mr.material.name for mr in materiales])
+
+    get_materiales.short_description = "Materiales"
+
+
+    def get_manos_de_obra(self, obj):
+        # Muestra todas las manos de obra conectados a la receta
+        manos_de_obra = obj.manodeobrareceta_set.all()
+        return ", ".join([mr.manodeobra.name for mr in manos_de_obra])
+
+    get_manos_de_obra.short_description = "Manos de obra"
